@@ -7,11 +7,19 @@
 
 import UIKit
 
-class FeedController: UIViewController {
+class FeedController: UICollectionViewController {
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .link
+        configureUI()
+    }
+    
+    // MARK: - Helpers
+    
+    func configureUI(){
+        collectionView.backgroundColor = .white
     }
 }
