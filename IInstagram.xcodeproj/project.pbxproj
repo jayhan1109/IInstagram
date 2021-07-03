@@ -19,6 +19,7 @@
 		F074311026903D3F007A5001 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074310F26903D3F007A5001 /* NotificationController.swift */; };
 		F074311226903D47007A5001 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074311126903D47007A5001 /* ProfileController.swift */; };
 		F07431142690426C007A5001 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07431132690426C007A5001 /* FeedCell.swift */; };
+		F07431182690430B007A5001 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07431172690430B007A5001 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F074310F26903D3F007A5001 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F074311126903D47007A5001 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		F07431132690426C007A5001 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		F07431172690430B007A5001 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		F074310626903B9C007A5001 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F07431172690430B007A5001 /* Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				F07430EE26903B00007A5001 /* AppDelegate.swift in Sources */,
 				F074311026903D3F007A5001 /* NotificationController.swift in Sources */,
 				F07430F026903B00007A5001 /* SceneDelegate.swift in Sources */,
+				F07431182690430B007A5001 /* Extension.swift in Sources */,
 				F074310E26903D37007A5001 /* ImageSelectorController.swift in Sources */,
 				F074310A26903D21007A5001 /* FeedController.swift in Sources */,
 				F074311226903D47007A5001 /* ProfileController.swift in Sources */,
