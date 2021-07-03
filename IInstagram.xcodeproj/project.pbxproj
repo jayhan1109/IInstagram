@@ -56,15 +56,71 @@
 		F07430EC26903B00007A5001 /* IInstagram */ = {
 			isa = PBXGroup;
 			children = (
-				F07430ED26903B00007A5001 /* AppDelegate.swift */,
-				F07430EF26903B00007A5001 /* SceneDelegate.swift */,
-				F07430F126903B00007A5001 /* ViewController.swift */,
-				F07430F326903B00007A5001 /* Main.storyboard */,
-				F07430F626903B01007A5001 /* Assets.xcassets */,
-				F07430F826903B01007A5001 /* LaunchScreen.storyboard */,
+				F074310726903BC5007A5001 /* Others */,
+				F074310526903B81007A5001 /* Model */,
+				F074310426903B80007A5001 /* View */,
+				F074310326903B7E007A5001 /* ViewModel */,
+				F074310226903B7B007A5001 /* Controller */,
+				F074310126903B7A007A5001 /* API */,
+				F074310626903B9C007A5001 /* Utils */,
 				F07430FB26903B01007A5001 /* Info.plist */,
 			);
 			path = IInstagram;
+			sourceTree = "<group>";
+		};
+		F074310126903B7A007A5001 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F074310226903B7B007A5001 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F07430F126903B00007A5001 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F074310326903B7E007A5001 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F074310426903B80007A5001 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F07430F326903B00007A5001 /* Main.storyboard */,
+				F07430F826903B01007A5001 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F074310526903B81007A5001 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F074310626903B9C007A5001 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F074310726903BC5007A5001 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				F07430F626903B01007A5001 /* Assets.xcassets */,
+				F07430ED26903B00007A5001 /* AppDelegate.swift */,
+				F07430EF26903B00007A5001 /* SceneDelegate.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
