@@ -18,6 +18,7 @@
 		F074310E26903D37007A5001 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074310D26903D37007A5001 /* ImageSelectorController.swift */; };
 		F074311026903D3F007A5001 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074310F26903D3F007A5001 /* NotificationController.swift */; };
 		F074311226903D47007A5001 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F074311126903D47007A5001 /* ProfileController.swift */; };
+		F07431142690426C007A5001 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07431132690426C007A5001 /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		F074310D26903D37007A5001 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		F074310F26903D3F007A5001 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		F074311126903D47007A5001 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		F07431132690426C007A5001 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				F07430F326903B00007A5001 /* Main.storyboard */,
 				F07430F826903B01007A5001 /* LaunchScreen.storyboard */,
+				F07431132690426C007A5001 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				F074310E26903D37007A5001 /* ImageSelectorController.swift in Sources */,
 				F074310A26903D21007A5001 /* FeedController.swift in Sources */,
 				F074311226903D47007A5001 /* ProfileController.swift in Sources */,
+				F07431142690426C007A5001 /* FeedCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
