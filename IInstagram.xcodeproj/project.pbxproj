@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,8 @@
 		F07C4D5F2692BEB9008A30D4 /* LoginFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */; };
 		F07C4D612692C549008A30D4 /* RegisterFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D602692C549008A30D4 /* RegisterFormModel.swift */; };
 		F07C4D662692D686008A30D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F07C4D652692D686008A30D4 /* GoogleService-Info.plist */; };
+		F081B8B52692E03200C1B975 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B8B42692E03200C1B975 /* ImageUploader.swift */; };
+		F081B8B72692E07500C1B975 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B8B62692E07500C1B975 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormModel.swift; sourceTree = "<group>"; };
 		F07C4D602692C549008A30D4 /* RegisterFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormModel.swift; sourceTree = "<group>"; };
 		F07C4D652692D686008A30D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F081B8B42692E03200C1B975 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		F081B8B62692E07500C1B975 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,6 @@
 				EB556C26658211108F06FF34 /* Pods-IInstagram.debug.xcconfig */,
 				65D4606AD67EF39049853B14 /* Pods-IInstagram.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -125,6 +128,8 @@
 		F074310126903B7A007A5001 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				F081B8B42692E03200C1B975 /* ImageUploader.swift */,
+				F081B8B62692E07500C1B975 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -332,8 +337,10 @@
 				F07C4D59269283A5008A30D4 /* CustomTextField.swift in Sources */,
 				F07C4D55269278AD008A30D4 /* LoginController.swift in Sources */,
 				F07430F226903B00007A5001 /* MainTabController.swift in Sources */,
+				F081B8B72692E07500C1B975 /* AuthService.swift in Sources */,
 				F074310C26903D2B007A5001 /* SearchController.swift in Sources */,
 				F07430EE26903B00007A5001 /* AppDelegate.swift in Sources */,
+				F081B8B52692E03200C1B975 /* ImageUploader.swift in Sources */,
 				F074311026903D3F007A5001 /* NotificationController.swift in Sources */,
 				F07430F026903B00007A5001 /* SceneDelegate.swift in Sources */,
 				F07431182690430B007A5001 /* Extension.swift in Sources */,

@@ -13,9 +13,12 @@ class RegisterController: UIViewController {
     
     private var viewModel = RegisterViewModel()
     
+    private var profileImage: UIImage?
+    
     private lazy var plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 140, weight: .regular, scale: .large)
+        btn.setImage(UIImage(systemName: "person.circle", withConfiguration: largeConfig), for: .normal)
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(handlerProfilePhotoSelect), for: .touchUpInside)
         return btn
@@ -46,6 +49,7 @@ class RegisterController: UIViewController {
         btn.setHeight(50)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
         btn.isEnabled = false
+        btn.addTarget(self, action: #selector(handlerRegister), for: .touchUpInside)
         return btn
     }()
     
@@ -121,6 +125,22 @@ class RegisterController: UIViewController {
         
         present(picker, animated: true, completion: nil)
     }
+    
+    @objc func handlerRegister(){
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              let fullname = fullnameTextField.text?.lowercased(),
+              let username = usernameTextField.text?.lowercased(),
+              let profileImage = profileImage else {return}
+        
+        let credential = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
+        
+        AuthService.registerUser(credential: credential) { error in
+            guard error == nil else { return }
+            
+            print("Successfully registered user with firestore...")
+        }
+    }
 }
 
 // MARK: - FormViewModel
@@ -138,6 +158,8 @@ extension RegisterController : UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = info[.editedImage] as? UIImage else {return}
+        
+        profileImage = selectedImage
         
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
