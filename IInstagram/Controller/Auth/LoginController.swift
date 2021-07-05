@@ -11,6 +11,8 @@ class LoginController: UIViewController {
     
     // MARK: - Properties
     
+    private var viewModel = LoginViewModel()
+    
     private let iconImage : UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "Instagram_logo_white")
@@ -34,8 +36,10 @@ class LoginController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("Log In", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        btn.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
+        btn.setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
         btn.layer.cornerRadius = 5
+        btn.isEnabled = false
         btn.setHeight(50)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
         return btn
@@ -60,6 +64,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configureNotificationObservers()
     }
     
     // MARK: - Helpers
@@ -84,10 +89,28 @@ class LoginController: UIViewController {
         dontHaveAccountButton.centerX(view: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
     }
+
+    func configureNotificationObservers(){
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
     
     // MARK: - Actions
     @objc func handlerShowSignUp(){
         let vc = RegisterController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+        if sender == emailTextField{
+            viewModel.setEmail(with: sender.text ?? "")
+        } else{
+            viewModel.setPassword(with: sender.text ?? "")
+        }
+        
+        loginButton.backgroundColor = viewModel.getLoginBtnBackgroundColor()
+        loginButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
+        loginButton.isEnabled = viewModel.getFormIsValid()
+        
     }
 }
