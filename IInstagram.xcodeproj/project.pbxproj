@@ -25,6 +25,7 @@
 		F07C4D59269283A5008A30D4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D58269283A5008A30D4 /* CustomTextField.swift */; };
 		F07C4D5B2692BCAA008A30D4 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D5A2692BCAA008A30D4 /* AuthViewModel.swift */; };
 		F07C4D5F2692BEB9008A30D4 /* LoginFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */; };
+		F07C4D612692C549008A30D4 /* RegisterFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07C4D602692C549008A30D4 /* RegisterFormModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F07C4D58269283A5008A30D4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F07C4D5A2692BCAA008A30D4 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormModel.swift; sourceTree = "<group>"; };
+		F07C4D602692C549008A30D4 /* RegisterFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +132,7 @@
 		F074310526903B81007A5001 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */,
+				F07C4D622692C54C008A30D4 /* Auth */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,6 +173,15 @@
 			children = (
 				F07C4D54269278AD008A30D4 /* LoginController.swift */,
 				F07C4D56269278BD008A30D4 /* RegisterController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F07C4D622692C54C008A30D4 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F07C4D5E2692BEB9008A30D4 /* LoginFormModel.swift */,
+				F07C4D602692C549008A30D4 /* RegisterFormModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -257,6 +268,7 @@
 				F07C4D57269278BD008A30D4 /* RegisterController.swift in Sources */,
 				F07C4D5F2692BEB9008A30D4 /* LoginFormModel.swift in Sources */,
 				F07C4D5B2692BCAA008A30D4 /* AuthViewModel.swift in Sources */,
+				F07C4D612692C549008A30D4 /* RegisterFormModel.swift in Sources */,
 				F074310A26903D21007A5001 /* FeedController.swift in Sources */,
 				F074311226903D47007A5001 /* ProfileController.swift in Sources */,
 				F07431142690426C007A5001 /* FeedCell.swift in Sources */,

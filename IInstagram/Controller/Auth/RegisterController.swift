@@ -11,6 +11,8 @@ class RegisterController: UIViewController {
     
     // MARK: - Properties
     
+    private var viewModel = RegisterViewModel()
+    
     private lazy var plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
@@ -34,7 +36,7 @@ class RegisterController: UIViewController {
     
     private let usernameTextField = CustomTextField(placeholder: "Username")
     
-    private lazy var loginButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Sign Up", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -42,6 +44,7 @@ class RegisterController: UIViewController {
         btn.layer.cornerRadius = 5
         btn.setHeight(50)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        btn.isEnabled = false
         return btn
     }()
     
@@ -58,6 +61,7 @@ class RegisterController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configureNotificationObservers()
     }
     
     // MARK: - Helpers
@@ -70,7 +74,7 @@ class RegisterController: UIViewController {
         plusPhotoButton.setDimensions(height: 140, width: 140)
         plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullnameTextField, usernameTextField, loginButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullnameTextField, usernameTextField, registerButton])
         stack.axis = .vertical
         stack.spacing = 20
         
@@ -82,9 +86,38 @@ class RegisterController: UIViewController {
         alreadyHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
     }
     
+    func configureNotificationObservers(){
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
     // MARK: - Actions
     
     @objc func handlerShowLogin(){
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+        if sender == emailTextField{
+            viewModel.setEmail(with: sender.text ?? "")
+        } else if sender == passwordTextField{
+            viewModel.setPassword(with: sender.text ?? "")
+        } else if sender == fullnameTextField{
+            viewModel.setFullname(with: sender.text ?? "")
+        } else{
+            viewModel.setUsername(with: sender.text ?? "")
+        }
+        
+        updateForm()
+    }
+}
+
+extension RegisterController : FormViewModel {
+    func updateForm() {
+        registerButton.backgroundColor = viewModel.getBtnBackgroundColor()
+        registerButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
+        registerButton.isEnabled = viewModel.isFormValid()
     }
 }

@@ -36,8 +36,7 @@ class LoginController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("Log In", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
-        btn.setTitleColor(UIColor(white: 1, alpha: 0.67), for: .normal)
+        btn.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         btn.layer.cornerRadius = 5
         btn.isEnabled = false
         btn.setHeight(50)
@@ -107,10 +106,16 @@ class LoginController: UIViewController {
         } else{
             viewModel.setPassword(with: sender.text ?? "")
         }
-        
-        loginButton.backgroundColor = viewModel.getLoginBtnBackgroundColor()
+         updateForm()
+    }
+}
+
+// MARK: - FormViewModel
+
+extension LoginController: FormViewModel {
+    func updateForm() {
+        loginButton.backgroundColor = viewModel.getBtnBackgroundColor()
         loginButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
-        loginButton.isEnabled = viewModel.getFormIsValid()
-        
+        loginButton.isEnabled = viewModel.isFormValid()
     }
 }
