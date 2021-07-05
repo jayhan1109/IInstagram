@@ -91,31 +91,29 @@ class FeedCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .white
-        
-        addSubview(profileImageView)
-        addSubview(usernameButton)
-        addSubview(postImageView)
-        addSubview(likesLabel)
-        addSubview(captionLabel)
-        addSubview(postTimeLabel)
     }
     
     override func layoutSubviews() {
-        profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12)
-        profileImageView.setDimensions(height: 40, width: 40)
+        addSubview(profileImageView)
+        profileImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 12, paddingLeft: 12, width: 40, height: 40)
         profileImageView.layer.cornerRadius = 40 / 2
         
+        addSubview(usernameButton)
         usernameButton.centerY(view: profileImageView,leftAnchor: profileImageView.rightAnchor, paddingLeft: 8)
         
+        addSubview(postImageView)
         postImageView.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8)
         postImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
         
         configureActionButtons()
         
+        addSubview(likesLabel)
         likesLabel.anchor(top: likeButton.bottomAnchor, left:leftAnchor, paddingTop: -4, paddingLeft: 8)
         
+        addSubview(captionLabel)
         captionLabel.anchor(top: likesLabel.bottomAnchor, left: leftAnchor, paddingTop: 8, paddingLeft: 8)
         
+        addSubview(postTimeLabel)
         postTimeLabel.anchor(top: captionLabel.bottomAnchor, left:leftAnchor, paddingTop: 8, paddingLeft: 8)
     }
     
