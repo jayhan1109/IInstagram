@@ -108,3 +108,13 @@ extension UIButton{
         setAttributedTitle(attributedTitle, for: .normal)
     }
 }
+
+extension UIViewController{
+    func configureGradientColor(){
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
+        gradient.locations = [0, 1]
+        view.layer.addSublayer(gradient)
+        gradient.frame = view.frame
+    }
+}
