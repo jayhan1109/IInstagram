@@ -138,7 +138,7 @@ class RegisterController: UIViewController {
         AuthService.registerUser(credential: credential) { error in
             guard error == nil else { return }
             
-            print("Successfully registered user with firestore...")
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
