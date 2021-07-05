@@ -30,7 +30,7 @@ class LoginController: UIViewController {
         return tf
     }()
     
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Log In", for: .normal)
         btn.setTitleColor(.white, for: .normal)
@@ -41,15 +41,16 @@ class LoginController: UIViewController {
         return btn
     }()
     
-    private let forgotPasswordButton: UIButton = {
+    private lazy var forgotPasswordButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.attributedTitle(firstPart: "Forgot your password? ", secondPart: "Get help signing in")
         return btn
     }()
     
-    private let dontHaveAccountButton: UIButton = {
+    private lazy var dontHaveAccountButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.attributedTitle(firstPart: "Don't have an account? ", secondPart: "Sign Up")      
+        btn.attributedTitle(firstPart: "Don't have an account? ", secondPart: "Sign Up")
+        btn.addTarget(self, action: #selector(handlerShowSignUp), for: .touchUpInside)
         return btn
     }()
     
@@ -64,15 +65,9 @@ class LoginController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-        view.backgroundColor = .white
+        configureGradientColor()
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
-        
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
         
         view.addSubview(iconImage)
         iconImage.centerX(view: view)
@@ -88,5 +83,11 @@ class LoginController: UIViewController {
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.centerX(view: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    // MARK: - Actions
+    @objc func handlerShowSignUp(){
+        let vc = RegisterController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
