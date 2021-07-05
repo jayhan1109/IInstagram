@@ -43,33 +43,13 @@ class LoginController: UIViewController {
     
     private let forgotPasswordButton: UIButton = {
         let btn = UIButton(type: .system)
-        
-        let atts :[NSAttributedString.Key : Any] = [.foregroundColor : UIColor(white: 1, alpha: 0.7), .font: UIFont.systemFont(ofSize: 16)]
-        
-        let boldAtts :[NSAttributedString.Key : Any] = [.foregroundColor : UIColor(white: 1, alpha: 0.7), .font: UIFont.boldSystemFont(ofSize: 16)]
-        
-        let attributedTitle = NSMutableAttributedString(string: "Forgot your password? ", attributes: atts)
-       
-        attributedTitle.append(NSAttributedString(string: "Get help signing in", attributes: boldAtts))
-        
-        btn.setAttributedTitle(attributedTitle, for: .normal)
-        
+        btn.attributedTitle(firstPart: "Forgot your password? ", secondPart: "Get help signing in")
         return btn
     }()
     
     private let dontHaveAccountButton: UIButton = {
         let btn = UIButton(type: .system)
-        
-        let atts :[NSAttributedString.Key : Any] = [.foregroundColor : UIColor(white: 1, alpha: 0.7), .font: UIFont.systemFont(ofSize: 16)]
-        
-        let boldAtts :[NSAttributedString.Key : Any] = [.foregroundColor : UIColor(white: 1, alpha: 0.7), .font: UIFont.boldSystemFont(ofSize: 16)]
-        
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ", attributes: atts)
-       
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: boldAtts))
-        
-        btn.setAttributedTitle(attributedTitle, for: .normal)
-        
+        btn.attributedTitle(firstPart: "Don't have an account? ", secondPart: "Sign Up")      
         return btn
     }()
     
