@@ -17,6 +17,7 @@ class RegisterController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         btn.tintColor = .white
+        btn.addTarget(self, action: #selector(handlerProfilePhotoSelect), for: .touchUpInside)
         return btn
     }()
     
@@ -112,12 +113,37 @@ class RegisterController: UIViewController {
         
         updateForm()
     }
+    
+    @objc func handlerProfilePhotoSelect(){
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
+    }
 }
+
+// MARK: - FormViewModel
 
 extension RegisterController : FormViewModel {
     func updateForm() {
         registerButton.backgroundColor = viewModel.getBtnBackgroundColor()
         registerButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
         registerButton.isEnabled = viewModel.isFormValid()
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension RegisterController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let selectedImage = info[.editedImage] as? UIImage else {return}
+        
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
+        plusPhotoButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }
