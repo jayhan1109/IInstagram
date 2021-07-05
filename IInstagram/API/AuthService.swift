@@ -35,10 +35,13 @@ struct AuthService{
                                           "uid":uid,
                                           "username":credential.username]
                 
-                Firestore.firestore().collection("users").document(uid).setData(data) { error in
-                    completion(error)
-                }
+                Firestore.firestore().collection("users").document(uid).setData(data, completion: completion)
             }
         }
+    }
+    
+    static func loginUser(email: String, password: String, completion: AuthDataResultCallback?){
+        
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }
 }

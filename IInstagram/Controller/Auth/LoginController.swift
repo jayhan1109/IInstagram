@@ -41,6 +41,7 @@ class LoginController: UIViewController {
         btn.isEnabled = false
         btn.setHeight(50)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return btn
     }()
     
@@ -107,6 +108,20 @@ class LoginController: UIViewController {
             viewModel.setPassword(with: sender.text ?? "")
         }
          updateForm()
+    }
+    
+    @objc func handleLogin(){
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+              
+        AuthService.loginUser(email: email, password: password) { result, error in
+            if let error = error {
+                print("Error logging in \(error.localizedDescription)")
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
