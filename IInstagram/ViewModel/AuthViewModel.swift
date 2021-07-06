@@ -41,11 +41,11 @@ class LoginViewModel: AuthenticationViewModel {
     }
     
     func getBtnBackgroundColor() -> UIColor {
-        return loginModel.formIsValid ? #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1) : #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
+        return loginModel.formIsValid ? .systemBlue : #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     }
     
     func getBtnTitleColor() -> UIColor{
-        return loginModel.formIsValid ? .white : UIColor(white: 1, alpha: 0.67)
+        return .white
     }
 }
 
@@ -81,10 +81,10 @@ class RegisterViewModel: AuthenticationViewModel {
     }
     
     func getBtnBackgroundColor() -> UIColor {
-        return registerModel.formIsValid ? #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1) : #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
+        return registerModel.formIsValid ? .systemBlue : #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     }
     
     func getBtnTitleColor() -> UIColor{
-        return registerModel.formIsValid ? .white : UIColor(white: 1, alpha: 0.67)
+        return .white
     }
 }

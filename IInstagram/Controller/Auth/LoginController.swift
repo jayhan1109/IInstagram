@@ -23,12 +23,14 @@ class LoginController: UIViewController {
     private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
+        tf.returnKeyType = .continue
         return tf
     }()
     
     private let passwordTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Password")
         tf.isSecureTextEntry = true
+        tf.returnKeyType = .done
         return tf
     }()
     
@@ -63,6 +65,7 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureTextFieldsDelegate()
         configureUI()
         configureNotificationObservers()
     }
@@ -70,7 +73,8 @@ class LoginController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-        configureGradientColor()
+        view.backgroundColor = .systemPurple
+        
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
         
@@ -93,6 +97,14 @@ class LoginController: UIViewController {
     func configureNotificationObservers(){
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func configureTextFieldsDelegate(){
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     // MARK: - Actions
@@ -132,5 +144,19 @@ extension LoginController: FormViewModel {
         loginButton.backgroundColor = viewModel.getBtnBackgroundColor()
         loginButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
         loginButton.isEnabled = viewModel.isFormValid()
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension LoginController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            handleLogin()
+        }
+        
+        return true
     }
 }

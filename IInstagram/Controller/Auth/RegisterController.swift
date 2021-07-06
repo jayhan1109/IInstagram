@@ -27,18 +27,28 @@ class RegisterController: UIViewController {
     private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
+        tf.returnKeyType = .continue
         return tf
     }()
     
     private let passwordTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Password")
         tf.isSecureTextEntry = true
+        tf.returnKeyType = .continue
         return tf
     }()
     
-    private let fullnameTextField = CustomTextField(placeholder: "Fullname")
+    private let fullnameTextField : UITextField = {
+        let tf = CustomTextField(placeholder: "Fullname")
+        tf.returnKeyType = .continue
+        return tf
+    }()
     
-    private let usernameTextField = CustomTextField(placeholder: "Username")
+    private let usernameTextField : UITextField = {
+        let tf = CustomTextField(placeholder: "Username")
+        tf.returnKeyType = .continue
+        return tf
+    }()
     
     private lazy var registerButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -65,6 +75,8 @@ class RegisterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        configureTextFieldsDelegate()
         configureUI()
         configureNotificationObservers()
     }
@@ -72,7 +84,7 @@ class RegisterController: UIViewController {
     // MARK: - Helpers
     
     func configureUI(){
-        configureGradientColor()
+        view.backgroundColor = .systemPurple
         
         view.addSubview(plusPhotoButton)
         plusPhotoButton.centerX(view: view)
@@ -96,6 +108,16 @@ class RegisterController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    func configureTextFieldsDelegate(){
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        fullnameTextField.delegate = self
+        usernameTextField.delegate = self
     }
     
     // MARK: - Actions
@@ -169,3 +191,20 @@ extension RegisterController : UIImagePickerControllerDelegate, UINavigationCont
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: - UITextFieldDelegate
+
+extension RegisterController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            fullnameTextField.becomeFirstResponder()
+        } else if textField == usernameTextField {
+            handlerRegister()
+        }
+        
+        return true
+    }
+}
+
