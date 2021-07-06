@@ -109,12 +109,11 @@ extension UIButton{
     }
 }
 
-extension UIViewController{
-    func configureGradientColor(){
-//        let gradient = CAGradientLayer()
-//        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-//        gradient.locations = [0, 1]
-//        view.layer.addSublayer(gradient)
-//        gradient.frame = view.frame
+extension UILabel {
+    func attributedStatText(value: Int, label: String){
+        let atts = NSMutableAttributedString(string: "\(value)\n", attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
+        atts.append(NSAttributedString(string: label, attributes: [.font : UIFont.systemFont(ofSize: 16), .foregroundColor : UIColor.lightGray]))
+        
+        self.attributedText = atts
     }
 }
