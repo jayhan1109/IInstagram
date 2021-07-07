@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 struct User{
     let email: String
@@ -13,6 +14,12 @@ struct User{
     let username: String
     let profileImageUrl: String
     let uid: String
+    
+    var isFollowed: Bool = false
+    
+    var isCurrentUser: Bool {
+        return Auth.auth().currentUser?.uid == self.uid
+    }
     
     var imageUrl : URL? {
         return URL(string: profileImageUrl)
