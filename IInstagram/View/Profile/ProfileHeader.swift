@@ -6,22 +6,28 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Properties
     
+    var viewModel: ProfileHeaderViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "ana")
         iv.contentMode = .scaleAspectFill
+        iv.backgroundColor = .lightGray
         iv.clipsToBounds = true
         return iv
     }()
     
     private let nameLabel : UILabel = {
         let label = UILabel()
-        label.text = "Ana Lee"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -139,4 +145,12 @@ class ProfileHeader: UICollectionReusableView {
         print("edit profile tapped")
     }
     
+    // MARK: - Helpers
+    
+    func configure(){
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.getFullname()
+        profileImageView.sd_setImage(with: viewModel.getProfileImageUrl(), completed: nil)
+    }
 }

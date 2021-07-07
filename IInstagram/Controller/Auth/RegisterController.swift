@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RegisterController: UIViewController {
     
     // MARK: - Properties
@@ -14,6 +15,8 @@ class RegisterController: UIViewController {
     private var viewModel = RegisterViewModel()
     
     private var profileImage: UIImage?
+    
+    weak var delegate: AuthDelegate?
     
     private lazy var plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -159,6 +162,8 @@ class RegisterController: UIViewController {
         
         AuthService.registerUser(credential: credential) { error in
             guard error == nil else { return }
+            
+            self.delegate?.authComplete()
             
             self.dismiss(animated: true, completion: nil)
         }
