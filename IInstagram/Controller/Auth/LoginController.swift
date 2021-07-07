@@ -1,5 +1,5 @@
 //
-//  LoginController.swift
+//  LoginViewController.swift
 //  IInstagram
 //
 //  Created by Jeongho Han on 2021-07-04.
@@ -11,7 +11,7 @@ protocol AuthDelegate: AnyObject {
     func authComplete()
 }
 
-class LoginController: UIViewController {
+class LoginViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -115,7 +115,7 @@ class LoginController: UIViewController {
     
     // MARK: - Actions
     @objc func handlerShowSignUp(){
-        let vc = RegisterController()
+        let vc = RegisterViewController()
         vc.delegate = delegate
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -148,7 +148,7 @@ class LoginController: UIViewController {
 
 // MARK: - AuthFormDelegate
 
-extension LoginController: AuthFormDelegate {
+extension LoginViewController: AuthFormDelegate {
     func updateForm() {
         loginButton.backgroundColor = loginManager.getBtnBackgroundColor()
         loginButton.setTitleColor(loginManager.getBtnTitleColor(), for: .normal)
@@ -158,7 +158,7 @@ extension LoginController: AuthFormDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension LoginController: UITextFieldDelegate{
+extension LoginViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()

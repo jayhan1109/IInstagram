@@ -10,7 +10,7 @@ import UIKit
 private let cellIdentifier = "ProfileCell"
 private let headerIdentifier = "ProfileHeader"
 
-class ProfileController: UICollectionViewController {
+class ProfileViewController: UICollectionViewController {
     
     // MARK: - Properties
     
@@ -48,7 +48,7 @@ class ProfileController: UICollectionViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension ProfileController {
+extension ProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
@@ -69,13 +69,13 @@ extension ProfileController {
 
 // MARK: - UICollectionViewDelegate
 
-extension ProfileController {
+extension ProfileViewController {
     
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension ProfileController : UICollectionViewDelegateFlowLayout {
+extension ProfileViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }

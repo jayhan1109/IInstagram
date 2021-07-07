@@ -9,19 +9,22 @@ import UIKit
 
 private let reuseIdentifier = "UserCell"
 
-class SearchController: UITableViewController {
+class SearchViewController: UITableViewController {
     
     // MARK: - properties
     
     private var users = [User]()
+    private var filteredUsers = [User]()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fetchUsers()
+        
         configureTableView()
+        fetchUsers()
+        configureSearchController()
     }
     
     // MARK: - API
@@ -40,29 +43,54 @@ class SearchController: UITableViewController {
         
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 64
+        tableView.keyboardDismissMode = .onDrag
+    }
+    
+    func configureSearchController(){
+        searchController.searchResultsUpdater = self
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
     }
 }
 
 // MARK: - UITableViewDataSource
 
-extension SearchController {
+extension SearchViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return filteredUsers.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
-        cell.user = users[indexPath.row]
+        cell.user = filteredUsers[indexPath.row]
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
 
-extension SearchController {
+extension SearchViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc = ProfileController(user: users[indexPath.row])
+        let vc = ProfileViewController(user: users[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        filteredUsers = users.filter({
+            $0.username.contains(searchText) ||
+                $0.fullname.contains(searchText)
+        })
+        
+        self.tableView.reloadData()
     }
 }

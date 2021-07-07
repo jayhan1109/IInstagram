@@ -10,7 +10,7 @@ import FirebaseAuth
 
 private let reuseIdentifier = "FeedCell"
 
-class FeedController: UICollectionViewController {
+class FeedViewController: UICollectionViewController {
     
     // MARK: - Lifecycle
     
@@ -38,8 +38,8 @@ class FeedController: UICollectionViewController {
         do {
             try Auth.auth().signOut()
             DispatchQueue.main.async {
-                let vc = LoginController()
-                vc.delegate = self.tabBarController as? MainTabController
+                let vc = LoginViewController()
+                vc.delegate = self.tabBarController as? MainTabViewController
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
@@ -52,7 +52,7 @@ class FeedController: UICollectionViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension FeedController {
+extension FeedViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -66,7 +66,7 @@ extension FeedController {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension FeedController: UICollectionViewDelegateFlowLayout {
+extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = view.frame.width

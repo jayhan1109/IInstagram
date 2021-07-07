@@ -8,7 +8,7 @@
 import UIKit
 
 
-class RegisterController: UIViewController {
+class RegisterViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -172,7 +172,7 @@ class RegisterController: UIViewController {
 
 // MARK: - AuthFormDelegate
 
-extension RegisterController : AuthFormDelegate {
+extension RegisterViewController : AuthFormDelegate {
     func updateForm() {
         registerButton.backgroundColor = registerManager.getBtnBackgroundColor()
         registerButton.setTitleColor(registerManager.getBtnTitleColor(), for: .normal)
@@ -181,7 +181,7 @@ extension RegisterController : AuthFormDelegate {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension RegisterController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension RegisterViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = info[.editedImage] as? UIImage else {return}
@@ -199,7 +199,7 @@ extension RegisterController : UIImagePickerControllerDelegate, UINavigationCont
 
 // MARK: - UITextFieldDelegate
 
-extension RegisterController: UITextFieldDelegate{
+extension RegisterViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()

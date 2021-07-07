@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class MainTabController: UITabBarController {
+class MainTabViewController: UITabBarController {
     
     // MARK: - Lifecycle
     
@@ -31,7 +31,7 @@ class MainTabController: UITabBarController {
     func checkUserIsLoggedIn(){
         if Auth.auth().currentUser == nil{
             DispatchQueue.main.async {
-                let vc = LoginController()
+                let vc = LoginViewController()
                 vc.delegate = self
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
@@ -53,15 +53,15 @@ class MainTabController: UITabBarController {
         view.backgroundColor = .white
         
         let feedLayout = UICollectionViewFlowLayout()
-        let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedController(collectionViewLayout: feedLayout))
+        let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedViewController(collectionViewLayout: feedLayout))
         
-        let search = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchController())
+        let search = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchViewController())
         
-        let imageSelector = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: ImageSelectorController())
+        let imageSelector = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: ImageSelectorViewController())
         
-        let notification = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"), rootViewController: NotificationController())
+        let notification = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"), rootViewController: NotificationViewController())
         
-        let profileVC = ProfileController(user: user)
+        let profileVC = ProfileViewController(user: user)
         let profile = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: profileVC)
         
         viewControllers = [feed, search, imageSelector, notification, profile]
@@ -82,7 +82,7 @@ class MainTabController: UITabBarController {
 
 // MARK: - AuthDelegate
 
-extension MainTabController: AuthDelegate{
+extension MainTabViewController: AuthDelegate{
     func authComplete() {
         fetchUser()
     }
