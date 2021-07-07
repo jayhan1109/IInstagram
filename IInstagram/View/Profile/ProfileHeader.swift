@@ -12,7 +12,7 @@ class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Properties
     
-    var viewModel: ProfileHeaderViewModel? {
+    var profileHeaderModel: ProfileHeaderModel? {
         didSet {
             configure()
         }
@@ -148,9 +148,9 @@ class ProfileHeader: UICollectionReusableView {
     // MARK: - Helpers
     
     func configure(){
-        guard let viewModel = viewModel else { return }
+        guard let profileHeaderModel = profileHeaderModel else { return }
         
-        nameLabel.text = viewModel.getFullname()
-        profileImageView.sd_setImage(with: viewModel.getProfileImageUrl(), completed: nil)
+        nameLabel.text = profileHeaderModel.fullname
+        profileImageView.sd_setImage(with: profileHeaderModel.profileImageUrl, completed: nil)
     }
 }

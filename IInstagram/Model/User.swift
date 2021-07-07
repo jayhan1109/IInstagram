@@ -13,4 +13,8 @@ struct User{
     let username: String
     let profileImageUrl: String
     let uid: String
+    
+    var imageUrl : URL? {
+        URL(string: profileImageUrl)
+    }
 }
