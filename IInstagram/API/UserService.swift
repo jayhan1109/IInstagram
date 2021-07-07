@@ -27,4 +27,25 @@ struct UserService {
             completion(user)
         }
     }
+    
+    static func fetchUsers(completion: @escaping ([User]) -> Void) {
+        COLLECTION_USERS.getDocuments { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            
+            let users: [User] = snapshot.documents.compactMap { document in
+                let data = document.data()
+                
+                guard let email = data["email"] as? String,
+                      let fullname = data["fullname"] as? String,
+                      let username = data["username"] as? String,
+                      let profileImageUrl = data["profileImageUrl"] as? String,
+                      let uid = data["uid"] as? String else { return nil}
+                
+                return User(email: email, fullname: fullname, username: username, profileImageUrl: profileImageUrl, uid: uid)
+                
+            }
+            
+            completion(users)
+        }
+    }
 }
