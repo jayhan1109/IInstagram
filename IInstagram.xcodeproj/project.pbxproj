@@ -129,7 +129,7 @@
 				F074310726903BC5007A5001 /* Others */,
 				F074310526903B81007A5001 /* Model */,
 				F074310426903B80007A5001 /* View */,
-				F074310326903B7E007A5001 /* ViewModel */,
+				F074310326903B7E007A5001 /* Managers */,
 				F074310226903B7B007A5001 /* Controller */,
 				F074310126903B7A007A5001 /* API */,
 				F074310626903B9C007A5001 /* Utils */,
@@ -158,12 +158,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		F074310326903B7E007A5001 /* ViewModel */ = {
+		F074310326903B7E007A5001 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				F07C4D5A2692BCAA008A30D4 /* AuthViewModel.swift */,
 			);
-			path = ViewModel;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		F074310426903B80007A5001 /* View */ = {

@@ -12,7 +12,7 @@ class RegisterController: UIViewController {
     
     // MARK: - Properties
     
-    private var viewModel = RegisterViewModel()
+    private var registerManager = RegisterManager()
     
     private var profileImage: UIImage?
     
@@ -131,13 +131,13 @@ class RegisterController: UIViewController {
     
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField{
-            viewModel.setEmail(with: sender.text ?? "")
+            registerManager.setEmail(with: sender.text ?? "")
         } else if sender == passwordTextField{
-            viewModel.setPassword(with: sender.text ?? "")
+            registerManager.setPassword(with: sender.text ?? "")
         } else if sender == fullnameTextField{
-            viewModel.setFullname(with: sender.text ?? "")
+            registerManager.setFullname(with: sender.text ?? "")
         } else{
-            viewModel.setUsername(with: sender.text ?? "")
+            registerManager.setUsername(with: sender.text ?? "")
         }
         
         updateForm()
@@ -170,13 +170,13 @@ class RegisterController: UIViewController {
     }
 }
 
-// MARK: - FormViewModel
+// MARK: - AuthFormDelegate
 
-extension RegisterController : FormViewModel {
+extension RegisterController : AuthFormDelegate {
     func updateForm() {
-        registerButton.backgroundColor = viewModel.getBtnBackgroundColor()
-        registerButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
-        registerButton.isEnabled = viewModel.isFormValid()
+        registerButton.backgroundColor = registerManager.getBtnBackgroundColor()
+        registerButton.setTitleColor(registerManager.getBtnTitleColor(), for: .normal)
+        registerButton.isEnabled = registerManager.isFormValid()
     }
 }
 

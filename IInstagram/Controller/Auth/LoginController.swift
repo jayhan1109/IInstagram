@@ -15,7 +15,7 @@ class LoginController: UIViewController {
     
     // MARK: - Properties
     
-    private var viewModel = LoginViewModel()
+    private var loginManager = LoginManager()
     
     weak var delegate: AuthDelegate?
     
@@ -122,9 +122,9 @@ class LoginController: UIViewController {
     
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField{
-            viewModel.setEmail(with: sender.text ?? "")
+            loginManager.setEmail(with: sender.text ?? "")
         } else{
-            viewModel.setPassword(with: sender.text ?? "")
+            loginManager.setPassword(with: sender.text ?? "")
         }
          updateForm()
     }
@@ -146,13 +146,13 @@ class LoginController: UIViewController {
     }
 }
 
-// MARK: - FormViewModel
+// MARK: - AuthFormDelegate
 
-extension LoginController: FormViewModel {
+extension LoginController: AuthFormDelegate {
     func updateForm() {
-        loginButton.backgroundColor = viewModel.getBtnBackgroundColor()
-        loginButton.setTitleColor(viewModel.getBtnTitleColor(), for: .normal)
-        loginButton.isEnabled = viewModel.isFormValid()
+        loginButton.backgroundColor = loginManager.getBtnBackgroundColor()
+        loginButton.setTitleColor(loginManager.getBtnTitleColor(), for: .normal)
+        loginButton.isEnabled = loginManager.isFormValid()
     }
 }
 
