@@ -15,6 +15,6 @@ struct User{
     let uid: String
     
     var imageUrl : URL? {
-        URL(string: profileImageUrl)
+        return URL(string: profileImageUrl)
     }
 }
