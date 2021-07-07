@@ -36,6 +36,7 @@
 		F0C303D12695238200AFA44E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C303D02695238200AFA44E /* Constant.swift */; };
 		F0C303D3269524B700AFA44E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C303D2269524B700AFA44E /* User.swift */; };
 		F0C303D52695297700AFA44E /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C303D42695297700AFA44E /* ProfileHeaderViewModel.swift */; };
+		F0C303DA26953E6400AFA44E /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C303D926953E6400AFA44E /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		F0C303D02695238200AFA44E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F0C303D2269524B700AFA44E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F0C303D42695297700AFA44E /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		F0C303D926953E6400AFA44E /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		F074310426903B80007A5001 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F0C303D626953E2500AFA44E /* Search */,
 				F081B8B92692F68B00C1B975 /* Feed */,
 				F081B8B82692F68100C1B975 /* Profile */,
 				F07430F326903B00007A5001 /* Main.storyboard */,
@@ -251,6 +254,14 @@
 				F07431132690426C007A5001 /* FeedCell.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		F0C303D626953E2500AFA44E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F0C303D926953E6400AFA44E /* UserCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +392,7 @@
 				F07430F026903B00007A5001 /* SceneDelegate.swift in Sources */,
 				F07431182690430B007A5001 /* Extension.swift in Sources */,
 				F074310E26903D37007A5001 /* ImageSelectorController.swift in Sources */,
+				F0C303DA26953E6400AFA44E /* UserCell.swift in Sources */,
 				F07C4D57269278BD008A30D4 /* RegisterController.swift in Sources */,
 				F07C4D5F2692BEB9008A30D4 /* LoginFormModel.swift in Sources */,
 				F0C303CF2695234400AFA44E /* UserService.swift in Sources */,
