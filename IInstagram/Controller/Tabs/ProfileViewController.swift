@@ -10,6 +10,7 @@ import UIKit
 private let cellIdentifier = "ProfileCell"
 private let headerIdentifier = "ProfileHeader"
 
+
 class ProfileViewController: UICollectionViewController {
     
     // MARK: - Properties
@@ -32,6 +33,16 @@ class ProfileViewController: UICollectionViewController {
         super.viewDidLoad()
         
         configureCollectionview()
+        checkIfUserIsFollowed()
+    }
+    
+    // MARK: - API
+    
+    func checkIfUserIsFollowed(){
+        UserService.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: - Helpers
@@ -61,6 +72,7 @@ extension ProfileViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         
+        header.delegate = self
         header.profileHeaderModel = ProfileHeaderModel(user: user)
         
         return header
@@ -91,5 +103,25 @@ extension ProfileViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 240)
+    }
+}
+
+// MARK: - ProfileHeaderDelegate
+
+extension ProfileViewController: ProfileHeaderDelegate {
+    func updateUI() {
+        if user.isCurrentUser {
+            print("Show Edit Profile")
+        } else if user.isFollowed {
+            UserService.unfollow(uid: user.uid) { error in
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
+        } else {
+            UserService.follow(uid: user.uid) { error in
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

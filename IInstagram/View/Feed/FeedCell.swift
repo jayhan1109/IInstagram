@@ -16,7 +16,7 @@ class FeedCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.isUserInteractionEnabled = true
         iv.clipsToBounds = true
-        iv.image = #imageLiteral(resourceName: "venom-7")
+        iv.image = #imageLiteral(resourceName: "baptist")
         return iv
     }()
     
@@ -34,7 +34,7 @@ class FeedCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.isUserInteractionEnabled = true
         iv.clipsToBounds = true
-        iv.image = #imageLiteral(resourceName: "venom-7")
+        iv.image = #imageLiteral(resourceName: "dva")
         return iv
     }()
     

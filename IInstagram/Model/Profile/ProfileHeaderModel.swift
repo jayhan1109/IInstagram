@@ -32,10 +32,18 @@ struct ProfileHeaderModel {
     }
     
     var followButtonBackgroundColor: UIColor {
-        return user.isCurrentUser ? .white : .systemBlue
+        if user.isCurrentUser {
+            return .white
+        }
+        
+        return user.isFollowed ? .white : .systemBlue
     }
     
     var followButtonTextColor: UIColor {
-        return user.isCurrentUser ? .black : .white
+        if user.isCurrentUser {
+            return .black
+        }
+        
+        return user.isFollowed ? .black : .white
     }
 }

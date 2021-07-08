@@ -8,6 +8,10 @@
 import UIKit
 import SDWebImage
 
+protocol ProfileHeaderDelegate: class {
+    func updateUI()
+}
+
 class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Properties
@@ -17,6 +21,8 @@ class ProfileHeader: UICollectionReusableView {
             configure()
         }
     }
+    
+    weak var delegate: ProfileHeaderDelegate?
     
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -34,7 +40,7 @@ class ProfileHeader: UICollectionReusableView {
     
     private lazy var editProfileFollowButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Edit Profile", for: .normal)
+        btn.setTitle("Loading", for: .normal)
         btn.layer.cornerRadius = 3
         btn.layer.borderColor = UIColor.lightGray.cgColor
         btn.layer.borderWidth = 0.5
@@ -142,7 +148,7 @@ class ProfileHeader: UICollectionReusableView {
     // MARK: - Actions
     
     @objc func handlerEditProfileFollowTapped(){
-        print("edit profile tapped")
+        delegate?.updateUI()
     }
     
     // MARK: - Helpers
@@ -154,7 +160,7 @@ class ProfileHeader: UICollectionReusableView {
         profileImageView.sd_setImage(with: profileHeaderModel.profileImageUrl, completed: nil)
         
         editProfileFollowButton.setTitle(profileHeaderModel.followButtonText, for: .normal)
-        editProfileFollowButton.setTitleColor(profileHeaderModel.followButtonTextColor, for: .normal)
         editProfileFollowButton.backgroundColor = profileHeaderModel.followButtonBackgroundColor
+        editProfileFollowButton.setTitleColor(profileHeaderModel.followButtonTextColor, for: .normal)
     }
 }
