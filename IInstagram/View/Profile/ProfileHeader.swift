@@ -62,7 +62,7 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedStatText(value: 2, label: "followers")
+        label.attributedStatText(value: 0, label: "followers")
         return label
     }()
     
@@ -70,7 +70,7 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedStatText(value: 1, label: "following")
+        label.attributedStatText(value: 0, label: "following")
         return label
     }()
     
@@ -145,6 +145,7 @@ class ProfileHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Actions
     
     @objc func handlerEditProfileFollowTapped(){
@@ -162,5 +163,8 @@ class ProfileHeader: UICollectionReusableView {
         editProfileFollowButton.setTitle(profileHeaderModel.followButtonText, for: .normal)
         editProfileFollowButton.backgroundColor = profileHeaderModel.followButtonBackgroundColor
         editProfileFollowButton.setTitleColor(profileHeaderModel.followButtonTextColor, for: .normal)
+        
+        followersLabel.attributedStatText(value: profileHeaderModel.numOfFollowers, label: "followers")
+        followingLabel.attributedStatText(value: profileHeaderModel.numOfFollowings, label: "followings")
     }
 }

@@ -29,11 +29,12 @@ class ProfileViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         configureCollectionview()
         checkIfUserIsFollowed()
+        fetchUserStats()
     }
     
     // MARK: - API
@@ -42,6 +43,16 @@ class ProfileViewController: UICollectionViewController {
         UserService.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
             self.user.isFollowed = isFollowed
             self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats(){
+        UserService.fetchUserStats(uid: user.uid) { stats in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+            
+            print(self.user.stats.followers)
+            print(self.user.stats.following)
         }
     }
     
@@ -116,11 +127,13 @@ extension ProfileViewController: ProfileHeaderDelegate {
             UserService.unfollow(uid: user.uid) { error in
                 self.user.isFollowed = false
                 self.collectionView.reloadData()
+                self.fetchUserStats()
             }
         } else {
             UserService.follow(uid: user.uid) { error in
                 self.user.isFollowed = true
                 self.collectionView.reloadData()
+                self.fetchUserStats()
             }
         }
     }

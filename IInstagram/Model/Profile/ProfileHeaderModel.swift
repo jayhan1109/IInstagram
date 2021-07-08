@@ -23,6 +23,14 @@ struct ProfileHeaderModel {
         URL(string: user.profileImageUrl)
     }
     
+    var numOfFollowers : Int{
+        return user.stats.followers
+    }
+    
+    var numOfFollowings: Int {
+        return user.stats.following
+    }
+    
     var followButtonText: String {
         if user.isCurrentUser {
             return "Edit Profile"
