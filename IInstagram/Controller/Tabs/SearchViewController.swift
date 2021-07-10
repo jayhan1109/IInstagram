@@ -79,6 +79,8 @@ extension SearchViewController {
 // MARK: - UITableViewDelegate
 
 extension SearchViewController {
+    
+    // Go to the selected user's Profile
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = searchActive ? filteredUsers[indexPath.row] : users[indexPath.row]
         let vc = ProfileViewController(user: user)
@@ -89,8 +91,12 @@ extension SearchViewController {
 // MARK: - UISearchResultsUpdating
 
 extension SearchViewController: UISearchResultsUpdating {
+    
+    // When search text is updated
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        
+        // Set filteredUsers based on the searchText
         filteredUsers = users.filter({
             $0.username.contains(searchText) ||
                 $0.fullname.contains(searchText)

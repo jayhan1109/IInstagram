@@ -34,6 +34,7 @@ class FeedViewController: UICollectionViewController {
     
     // MARK: - Actions
     
+    // Action to logout
     @objc func handleLogout(){
         do {
             try Auth.auth().signOut()
@@ -69,6 +70,8 @@ extension FeedViewController {
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        // Width -> same with of the view
+        // Height -> width + top padding + profile image + bottom padding of profile image + (image + bottom part)
         let width = view.frame.width
         let height = width + 8 + 40 + 8 + 110
         

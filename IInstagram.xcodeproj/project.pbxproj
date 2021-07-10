@@ -105,6 +105,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F04B3F24269A65D3008F1D91 /* Custom UIView */ = {
+			isa = PBXGroup;
+			children = (
+				F07C4D58269283A5008A30D4 /* CustomTextField.swift */,
+			);
+			path = "Custom UIView";
+			sourceTree = "<group>";
+		};
 		F07430E126903B00007A5001 = {
 			isa = PBXGroup;
 			children = (
@@ -172,9 +180,9 @@
 				F0C303D626953E2500AFA44E /* Search */,
 				F081B8B92692F68B00C1B975 /* Feed */,
 				F081B8B82692F68100C1B975 /* Profile */,
+				F04B3F24269A65D3008F1D91 /* Custom UIView */,
 				F07430F326903B00007A5001 /* Main.storyboard */,
 				F07430F826903B01007A5001 /* LaunchScreen.storyboard */,
-				F07C4D58269283A5008A30D4 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

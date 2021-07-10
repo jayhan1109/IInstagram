@@ -13,10 +13,6 @@ protocol AuthenticationDelegate {
     func getBtnTitleColor() -> UIColor
 }
 
-protocol AuthFormDelegate {
-    func updateForm()
-}
-
 class LoginManager: AuthenticationDelegate {
     private var loginModel = LoginFormModel()
     

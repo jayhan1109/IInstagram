@@ -39,6 +39,7 @@ class ProfileViewController: UICollectionViewController {
     
     // MARK: - API
     
+    // Check if user is followed and Update follow button
     func checkIfUserIsFollowed(){
         UserService.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
             self.user.isFollowed = isFollowed
@@ -46,13 +47,11 @@ class ProfileViewController: UICollectionViewController {
         }
     }
     
+    // Fetch user's stat and update UI
     func fetchUserStats(){
         UserService.fetchUserStats(uid: user.uid) { stats in
             self.user.stats = stats
             self.collectionView.reloadData()
-            
-            print(self.user.stats.followers)
-            print(self.user.stats.following)
         }
     }
     
@@ -90,28 +89,29 @@ extension ProfileViewController {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-
-extension ProfileViewController {
-    
-}
-
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProfileViewController : UICollectionViewDelegateFlowLayout {
+    
+    // Space between items
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
     
+    // Space between line
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
     
+    // Size of each item
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // width => subtract the 2 item spacing and divide by 3
         let width = (view.frame.width - 2) / 3
         return CGSize(width: width, height: width)
     }
     
+    // Size of header section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 240)
     }
@@ -120,6 +120,8 @@ extension ProfileViewController : UICollectionViewDelegateFlowLayout {
 // MARK: - ProfileHeaderDelegate
 
 extension ProfileViewController: ProfileHeaderDelegate {
+    
+    // Update UI when follow / following / Edit Profile button is tapped
     func updateUI() {
         if user.isCurrentUser {
             print("Show Edit Profile")

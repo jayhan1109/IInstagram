@@ -10,14 +10,17 @@ import FirebaseAuth
 
 class MainTabViewController: UITabBarController {
     
-    // MARK: - Lifecycle
+    // MARK: - Properties
     
     private var user: User? {
         didSet {
+            // Configure view controllers when user is set
             guard let user = user else { return }
             configureViewControllers(with: user)
         }
     }
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,7 @@ class MainTabViewController: UITabBarController {
     
     // MARK: - API
     
+    // Check if user is logged in and if not, go to login page
     func checkUserIsLoggedIn(){
         if Auth.auth().currentUser == nil{
             DispatchQueue.main.async {
@@ -40,6 +44,7 @@ class MainTabViewController: UITabBarController {
         }
     }
     
+    // Fetch user from API and initialize user property
     func fetchUser(){
         UserService.fetchUser { user in
             self.user = user
@@ -69,6 +74,7 @@ class MainTabViewController: UITabBarController {
         tabBar.tintColor = .black
     }
     
+    // Create a tab of UINavigationController from UIViewController
     private func templateNavigationController(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController) -> UINavigationController {
         
         let nav = UINavigationController(rootViewController: rootViewController)
@@ -83,6 +89,8 @@ class MainTabViewController: UITabBarController {
 // MARK: - AuthDelegate
 
 extension MainTabViewController: AuthDelegate{
+    
+    // Fetch user when authentication is completed
     func authComplete() {
         fetchUser()
     }

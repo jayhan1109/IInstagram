@@ -18,7 +18,7 @@ class RegisterViewController: UIViewController {
     
     weak var delegate: AuthDelegate?
     
-    private lazy var plusPhotoButton: UIButton = {
+    private lazy var profileImageView: UIButton = {
         let btn = UIButton(type: .system)
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 140, weight: .regular, scale: .large)
         btn.setImage(UIImage(systemName: "person.circle", withConfiguration: largeConfig), for: .normal)
@@ -89,17 +89,17 @@ class RegisterViewController: UIViewController {
     func configureUI(){
         view.backgroundColor = .systemPurple
         
-        view.addSubview(plusPhotoButton)
-        plusPhotoButton.centerX(view: view)
-        plusPhotoButton.setDimensions(height: 140, width: 140)
-        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        view.addSubview(profileImageView)
+        profileImageView.centerX(view: view)
+        profileImageView.setDimensions(height: 140, width: 140)
+        profileImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullnameTextField, usernameTextField, registerButton])
         stack.axis = .vertical
         stack.spacing = 20
         
         view.addSubview(stack)
-        stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: profileImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.centerX(view: view)
@@ -123,12 +123,21 @@ class RegisterViewController: UIViewController {
         usernameTextField.delegate = self
     }
     
+    // Update form everytime the text fields are edited
+    func updateForm() {
+        registerButton.backgroundColor = registerManager.getBtnBackgroundColor()
+        registerButton.setTitleColor(registerManager.getBtnTitleColor(), for: .normal)
+        registerButton.isEnabled = registerManager.isFormValid()
+    }
+    
     // MARK: - Actions
     
+    // Action going back to LoginViewController
     @objc func handlerShowLogin(){
         navigationController?.popViewController(animated: true)
     }
     
+    // TextFields editing event
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField{
             registerManager.setEmail(with: sender.text ?? "")
@@ -143,6 +152,7 @@ class RegisterViewController: UIViewController {
         updateForm()
     }
     
+    // Action when profile image button pressed
     @objc func handlerProfilePhotoSelect(){
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -151,6 +161,7 @@ class RegisterViewController: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
+    // Action when register button pressed
     @objc func handlerRegister(){
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
@@ -163,6 +174,8 @@ class RegisterViewController: UIViewController {
         AuthService.registerUser(credential: credential) { error in
             guard error == nil else { return }
             
+            // Implemented in MainTabViewController
+            // Fetch User
             self.delegate?.authComplete()
             
             self.dismiss(animated: true, completion: nil)
@@ -170,28 +183,20 @@ class RegisterViewController: UIViewController {
     }
 }
 
-// MARK: - AuthFormDelegate
-
-extension RegisterViewController : AuthFormDelegate {
-    func updateForm() {
-        registerButton.backgroundColor = registerManager.getBtnBackgroundColor()
-        registerButton.setTitleColor(registerManager.getBtnTitleColor(), for: .normal)
-        registerButton.isEnabled = registerManager.isFormValid()
-    }
-}
-
 // MARK: - UIImagePickerControllerDelegate
 extension RegisterViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // Parse image from image picker and set it to plusPhotoButton
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = info[.editedImage] as? UIImage else {return}
         
         profileImage = selectedImage
         
-        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
-        plusPhotoButton.layer.masksToBounds = true
-        plusPhotoButton.layer.borderColor = UIColor.white.cgColor
-        plusPhotoButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
         self.dismiss(animated: true, completion: nil)
     }

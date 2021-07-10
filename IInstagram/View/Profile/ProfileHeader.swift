@@ -148,6 +148,7 @@ class ProfileHeader: UICollectionReusableView {
     
     // MARK: - Actions
     
+    // Action when follow / following / Edit Profile button is tapped
     @objc func handlerEditProfileFollowTapped(){
         delegate?.updateUI()
     }

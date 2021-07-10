@@ -101,9 +101,11 @@ class LoginViewController: UIViewController {
     }
 
     func configureNotificationObservers(){
+        // textFields's editing change event
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
+        // Dismiss keyboard when touch outside of UIView
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
     }
@@ -113,6 +115,12 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
     }
     
+    func updateForm() {
+        loginButton.backgroundColor = loginManager.getBtnBackgroundColor()
+        loginButton.setTitleColor(loginManager.getBtnTitleColor(), for: .normal)
+        loginButton.isEnabled = loginManager.isFormValid()
+    }
+    
     // MARK: - Actions
     @objc func handlerShowSignUp(){
         let vc = RegisterViewController()
@@ -120,15 +128,18 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // TextFields editing event
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField{
             loginManager.setEmail(with: sender.text ?? "")
         } else{
             loginManager.setPassword(with: sender.text ?? "")
         }
+        
          updateForm()
     }
     
+    // Action when login button pressed
     @objc func handleLogin(){
         guard let email = emailTextField.text,
               let password = passwordTextField.text else { return }
@@ -139,6 +150,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
+            // Implemented in MainTabViewController
+            // Fetch User
             self.delegate?.authComplete()
             
             self.dismiss(animated: true, completion: nil)
@@ -146,15 +159,6 @@ class LoginViewController: UIViewController {
     }
 }
 
-// MARK: - AuthFormDelegate
-
-extension LoginViewController: AuthFormDelegate {
-    func updateForm() {
-        loginButton.backgroundColor = loginManager.getBtnBackgroundColor()
-        loginButton.setTitleColor(loginManager.getBtnTitleColor(), for: .normal)
-        loginButton.isEnabled = loginManager.isFormValid()
-    }
-}
 
 // MARK: - UITextFieldDelegate
 

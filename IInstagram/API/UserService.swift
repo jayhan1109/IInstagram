@@ -10,6 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct UserService {
+    
+    // Fetch current user's data from DB
     static func fetchUser(completion: @escaping (User) -> Void){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -28,6 +30,7 @@ struct UserService {
         }
     }
     
+    // Fetch all users data from DB
     static func fetchUsers(completion: @escaping ([User]) -> Void) {
         COLLECTION_USERS.getDocuments { snapshot, error in
             guard let snapshot = snapshot else { return }
@@ -49,39 +52,41 @@ struct UserService {
         }
     }
     
+    // Update current user to follow the given uid user
     static func follow(uid: String, completion: @escaping (Error?)-> Void){
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
 
-        COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).setData([:]) { error in
-            COLLECTION_FOLLOWERS.document(uid).collection("user-followers").document(currentUid).setData([:],completion: completion)
+        COLLECTION_FOLLOWING.document(currentUid).collection(COLLECTION_USER_FOLLOWING).document(uid).setData([:]) { error in
+            COLLECTION_FOLLOWERS.document(uid).collection(COLLECTION_USER_FOLLOWER).document(currentUid).setData([:],completion: completion)
         }
     }
     
+    // Update current user to unfollow the given uid user
     static func unfollow(uid: String, completion: @escaping (Error?)-> Void){
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
-        COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).delete { error in
-            COLLECTION_FOLLOWERS.document(uid).collection("user-followers").document(currentUid).delete(completion: completion)
+        COLLECTION_FOLLOWING.document(currentUid).collection(COLLECTION_USER_FOLLOWING).document(uid).delete { error in
+            COLLECTION_FOLLOWERS.document(uid).collection(COLLECTION_USER_FOLLOWER).document(currentUid).delete(completion: completion)
         }
     }
     
+    // Check if current user is following the given uid user
     static func checkIfUserIsFollowed(uid: String, completion: @escaping (Bool) -> Void){
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         
-        COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).getDocument { snapshot, error in
+        COLLECTION_FOLLOWING.document(currentUid).collection(COLLECTION_USER_FOLLOWING).document(uid).getDocument { snapshot, error in
             guard let isFollowed = snapshot?.exists else { return }
             completion(isFollowed)
         }
     }
     
+    // Fetch the given uid user's stats
     static func fetchUserStats(uid: String, completion: @escaping (UserStats)->Void){
-        COLLECTION_FOLLOWERS.document(uid).collection("user-followers").getDocuments { snapshot, _ in
+        COLLECTION_FOLLOWERS.document(uid).collection(COLLECTION_USER_FOLLOWER).getDocuments { snapshot, _ in
             let followers = snapshot?.documents.count ?? 0
             
-            COLLECTION_FOLLOWING.document(uid).collection("user-following").getDocuments { snapshot, _ in
+            COLLECTION_FOLLOWING.document(uid).collection(COLLECTION_USER_FOLLOWING).getDocuments { snapshot, _ in
                 let following = snapshot?.documents.count ?? 0
-                
-                print("f - \(following)")
                 
                 completion(UserStats(followers: followers, following: following))
             }

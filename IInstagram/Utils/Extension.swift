@@ -96,6 +96,8 @@ extension UIView{
 }
 
 extension UIButton{
+    
+    // Set button's title with attributed text
     func attributedTitle(firstPart: String, secondPart: String){
         let atts :[NSAttributedString.Key : Any] = [.foregroundColor : UIColor(white: 1, alpha: 0.95), .font: UIFont.systemFont(ofSize: 16)]
         
@@ -110,6 +112,8 @@ extension UIButton{
 }
 
 extension UILabel {
+    
+    // Set label's title with attributed text
     func attributedStatText(value: Int, label: String){
         let atts = NSMutableAttributedString(string: "\(value)\n", attributes: [.font : UIFont.boldSystemFont(ofSize: 16)])
         atts.append(NSAttributedString(string: label, attributes: [.font : UIFont.systemFont(ofSize: 16), .foregroundColor : UIColor.lightGray]))
