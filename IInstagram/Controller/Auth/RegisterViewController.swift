@@ -106,6 +106,7 @@ class RegisterViewController: UIViewController {
         alreadyHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
     }
     
+    // Add action to textfields and dismiss keyboard when tap outside of the view
     func configureNotificationObservers(){
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
@@ -116,6 +117,7 @@ class RegisterViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
     
+    // Configure text fields delegate
     func configureTextFieldsDelegate(){
         emailTextField.delegate = self
         passwordTextField.delegate = self

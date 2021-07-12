@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol AuthenticationDelegate {
-    func isFormValid() -> Bool
-    func getBtnBackgroundColor() -> UIColor
-    func getBtnTitleColor() -> UIColor
-}
-
-class LoginManager: AuthenticationDelegate {
+class LoginManager {
     private var loginModel = LoginFormModel()
     
     func setEmail(with email: String){
@@ -45,7 +39,7 @@ class LoginManager: AuthenticationDelegate {
     }
 }
 
-class RegisterManager: AuthenticationDelegate {
+class RegisterManager {
     private var registerModel = RegisterFormModel()
     
     func setEmail(with email: String){
